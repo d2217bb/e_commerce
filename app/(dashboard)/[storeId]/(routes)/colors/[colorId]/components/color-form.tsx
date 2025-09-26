@@ -27,7 +27,7 @@ const formSchema = z.object({
   value: z
     .string()
     .min(4)
-    .regex(/^#/, { message: "String must be a valid hex code " }),
+    .regex(/^#/, { message: "String must be a valid hex code" }),
 });
 
 type ColorFormValues = z.infer<typeof formSchema>;
@@ -66,7 +66,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
       }
 
       router.refresh();
-      router.push(`/${params.storeId}/colors`);
+      router.push(`/dashboard/colors`);
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong");
@@ -80,7 +80,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
       setLoading(true);
       await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`);
       router.refresh();
-      router.push(`/${params.storeId}/colors`);
+      router.push(`/dashboard/colors`);
       toast.success("Color deleted");
     } catch (error) {
       toast.error("Make sure you removed all products using this color first.");
@@ -89,6 +89,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
       setOpen(false);
     }
   };
+
   return (
     <>
       <AlertModal
@@ -102,7 +103,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
         {initialData && (
           <Button
             disabled={loading}
-            variant={"destructive"}
+            variant="destructive"
             size="icon"
             onClick={() => setOpen(true)}
           >

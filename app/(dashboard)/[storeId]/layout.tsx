@@ -1,3 +1,4 @@
+// app/dashboard/[storeId]/layout.tsx
 import Navbar from "@/components/navbar";
 import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
@@ -11,6 +12,7 @@ export default async function DashboardLayout({
   params: { storeId: string };
 }) {
   const { userId } = await auth();
+
   if (!userId) {
     redirect("/sign-in");
   }
@@ -23,6 +25,7 @@ export default async function DashboardLayout({
     redirect("/");
   }
 
+  // doar conținutul paginii, fără <html> sau <body>
   return (
     <>
       <Navbar />
@@ -30,3 +33,5 @@ export default async function DashboardLayout({
     </>
   );
 }
+
+
